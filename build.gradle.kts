@@ -37,7 +37,8 @@ dependencies {
 	//developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 	//annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("com.h2database:h2")
+	implementation("com.h2database:h2:2.2.224")
+	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
 }
 
 tasks.withType<KotlinCompile> {

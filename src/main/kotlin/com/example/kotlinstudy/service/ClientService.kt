@@ -1,4 +1,25 @@
 package com.example.kotlinstudy.service
 
-class ClientService {
+import com.example.kotlinstudy.dto.ClientDTO
+import com.example.kotlinstudy.model.Client
+import com.example.kotlinstudy.repository.ClientRepository
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import java.util.Optional
+
+@Service
+class ClientService(
+    val clientRepository: ClientRepository
+) {
+
+    @Transactional
+    fun saveClient(clientDTO: ClientDTO): Client {
+
+        val clientExist: Optional<Client> = clientRepository.findByEmail(clientDTO.email)
+        if(clientExist.isPresent){
+            throw IllegalStateException("Email already in use.")
+        }
+        return clientRepository.save(clientDTO.toModel())
+    }
+
 }
