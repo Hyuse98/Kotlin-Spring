@@ -19,7 +19,7 @@ class ClientController(val clientRepository: ClientRepository, val clientService
     fun findById(@PathVariable @Valid id: UUID): ResponseEntity<Client> {
 
         val client: Optional<Client> = clientRepository.findById(id)
-        if (client.isPresent()) {
+        if (client.isPresent) {
             return ResponseEntity.ok(client.get())
         }
         return ResponseEntity.notFound().build()
@@ -42,12 +42,11 @@ class ClientController(val clientRepository: ClientRepository, val clientService
     }
 
     @PutMapping("/{id}")
-    fun updateClient(@PathVariable id: UUID, @RequestBody clientDTO: ClientDTO): ResponseEntity<Client>{
-        var client: Client = clientRepository.findById(id).orElseThrow(){
-            throw ResponseStatusException(HttpStatus.NOT_FOUND,"deuruim")
+    fun updateClient(@PathVariable id: UUID, @RequestBody clientDTO: ClientDTO): ResponseEntity<Client> {
+        if (!clientRepository.existsById(id)) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "Não Encontrado")
         }
-        client = clientDTO.toModel()
-        client.id = id
-        return ResponseEntity.status(HttpStatus.CREATED).body(clientRepository.save(client))
+        val client = clientDTO.toModel().apply { this.id = id }
+        return ResponseEntity.status(HttpStatus.OK).body(clientRepository.save(client))
     }
 }
