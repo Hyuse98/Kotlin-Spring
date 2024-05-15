@@ -18,11 +18,9 @@ class ClientController(val clientRepository: ClientRepository, val clientService
     @GetMapping("/{id}")
     fun findById(@PathVariable @Valid id: UUID): ResponseEntity<Client> {
 
-        val client: Optional<Client> = clientRepository.findById(id)
-        if (client.isPresent) {
-            return ResponseEntity.ok(client.get())
-        }
-        return ResponseEntity.notFound().build()
+        val client: Client =
+            clientRepository.findById(id).orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND, "cu") }
+        return ResponseEntity.ok(client)
     }
 
     @GetMapping

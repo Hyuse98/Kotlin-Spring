@@ -2,7 +2,6 @@ package com.example.kotlinstudy.controller
 
 import com.example.kotlinstudy.dto.AddressDTO
 import com.example.kotlinstudy.model.Address
-import com.example.kotlinstudy.model.Client
 import com.example.kotlinstudy.repository.AddressRepository
 import com.example.kotlinstudy.repository.ClientRepository
 import com.example.kotlinstudy.service.AddressService
@@ -37,15 +36,8 @@ class AddressController(
 
     @PostMapping
     fun create(@RequestBody addressDTO: AddressDTO): ResponseEntity<Address> {
-        val clientId =
-            addressDTO.client.id ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Client ID is required")
 
-        val client: Optional<Client> = clientRepository.findById(clientId)
-        if (client.isPresent) {
-            val newAddress = addressDTO.toModel()
-            return ResponseEntity.status(HttpStatus.CREATED).body(addressRepository.save(newAddress))
-        }
-        throw ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado")
+        return ResponseEntity.status(HttpStatus.CREATED).body(addressService.createAddress(addressDTO))
     }
 
 //    @DeleteMapping

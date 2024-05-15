@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.Optional
 
+@Transactional
 @Service
 class ClientService(
     val clientRepository: ClientRepository
 ) {
 
-    @Transactional
+
     fun saveClient(clientDTO: ClientDTO): Client {
 
         val clientExist: Optional<Client> = clientRepository.findByEmail(clientDTO.email)
