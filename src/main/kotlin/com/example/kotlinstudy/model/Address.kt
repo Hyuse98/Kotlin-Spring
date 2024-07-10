@@ -16,9 +16,6 @@ class Address(
     @Column(name = "city")
     @NotBlank
     var city: String? = null,
-    var client_id: UUID
 
-//    @ManyToOne(cascade = [CascadeType.MERGE])
-//    @JoinColumn(name = "client_id")
-//    var client: Client? = null
+    var personId: UUID
 )

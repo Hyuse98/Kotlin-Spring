@@ -5,12 +5,12 @@ import java.util.*
 
 data class AddressDTO(
     val city: String,
-    val client_id: UUID
+    val personId: UUID
 ) {
     fun toModel(): Address {
         return Address(
             city = this.city,
-            client_id = this.client_id
+            personId = this.personId
         )
 
     }

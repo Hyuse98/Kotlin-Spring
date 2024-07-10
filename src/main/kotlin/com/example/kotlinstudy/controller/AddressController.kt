@@ -3,7 +3,7 @@ package com.example.kotlinstudy.controller
 import com.example.kotlinstudy.dto.AddressDTO
 import com.example.kotlinstudy.model.Address
 import com.example.kotlinstudy.repository.AddressRepository
-import com.example.kotlinstudy.repository.ClientRepository
+import com.example.kotlinstudy.repository.CustomerRepository
 import com.example.kotlinstudy.service.AddressService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -16,7 +16,7 @@ import java.util.*
 class AddressController(
     val addressService: AddressService,
     val addressRepository: AddressRepository,
-    val clientRepository: ClientRepository
+    val customerRepository: CustomerRepository
 ) {
 
     @GetMapping
@@ -31,7 +31,7 @@ class AddressController(
         if (address.isPresent) {
             return ResponseEntity.ok(address.get())
         }
-        return throw ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado")
+        return throw ResponseStatusException(HttpStatus.NOT_FOUND, "Address not Found")
     }
 
     @PostMapping

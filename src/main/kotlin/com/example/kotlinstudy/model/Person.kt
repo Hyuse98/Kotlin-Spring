@@ -5,7 +5,9 @@ import org.hibernate.annotations.GenericGenerator
 import java.util.*
 
 @Entity
-class Client(
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "personType", discriminatorType = DiscriminatorType.STRING)
+open class Person(
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -16,6 +18,7 @@ class Client(
 
     var email: String? = null,
 
-    @OneToMany(mappedBy = "client_id", fetch = FetchType.EAGER ,cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "personId", fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true)
     var addresses: MutableList<Address> = mutableListOf()
-)
+) {
+}
