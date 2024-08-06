@@ -20,5 +20,4 @@ open class Person(
 
     @OneToMany(mappedBy = "personId", fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true)
     var addresses: MutableList<Address> = mutableListOf()
-) {
-}
+)

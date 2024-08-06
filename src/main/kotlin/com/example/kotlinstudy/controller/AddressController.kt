@@ -3,7 +3,7 @@ package com.example.kotlinstudy.controller
 import com.example.kotlinstudy.dto.AddressDTO
 import com.example.kotlinstudy.model.Address
 import com.example.kotlinstudy.repository.AddressRepository
-import com.example.kotlinstudy.repository.CustomerRepository
+import com.example.kotlinstudy.repository.PersonRepository
 import com.example.kotlinstudy.service.AddressService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -16,7 +16,7 @@ import java.util.*
 class AddressController(
     val addressService: AddressService,
     val addressRepository: AddressRepository,
-    val customerRepository: CustomerRepository
+    val personRepository: PersonRepository
 ) {
 
     @GetMapping

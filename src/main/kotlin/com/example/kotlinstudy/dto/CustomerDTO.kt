@@ -6,8 +6,7 @@ import java.time.LocalDate
 data class CustomerDTO(
     val name: String,
     val email: String,
-    val birthDate: LocalDate,
-    val addresses: List<AddressDTO>? = null
+    val birthDate: LocalDate
 ) {
 
     fun toModel(): Customer {

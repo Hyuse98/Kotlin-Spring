@@ -10,4 +10,7 @@ class Customer(
     name: String,
     email: String,
     var birthDate: LocalDate
-) : Person()
+) : Person(
+    name = name,
+    email = email
+)
